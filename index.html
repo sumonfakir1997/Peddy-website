@@ -1,14 +1,133 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Paddy</title>
-</head>
-<body>
+    <link
+      href="https://cdn.jsdelivr.net/npm/daisyui@5"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  </head>
+  <body class="w-11/12 mx-auto">
+    <header>
+      <nav  class="py-2 flex justify-between items-center  py-7">
+        
+          <div class="navbar-start gap-3">
+            <svg
+              width="29"
+              height="24"
+              viewBox="0 0 29 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M14.4772 24C12.3632 24 10.2513 23.4925 8.15337 22.4775H8.15137C7.13836 21.988 6.485 20.937 6.485 19.8041C6.485 15.5083 10.0695 12.0117 14.4772 12.0117C18.8848 12.0117 22.4693 15.5083 22.4693 19.8041C22.4693 20.937 21.816 21.988 20.803 22.4775C18.703 23.4945 16.5911 24 14.4772 24Z"
+                fill="#0E7A81"
+              />
+              <path
+                d="M7.41809 6.08556C6.91658 3.66194 7.47004 0.840702 9.49805 0.135393C11.0425 -0.406076 13.3083 0.622916 14.0456 4.19541C14.5471 6.61904 13.9936 9.44027 11.9656 10.1436C10.4072 10.687 8.15337 9.64207 7.41809 6.08556Z"
+                fill="#0E7A81"
+              />
+              <path
+                d="M17.1465 10.1436C15.1185 9.44027 14.5651 6.61904 15.0666 4.19541C15.8019 0.6369 18.0577 -0.408076 19.6141 0.135391C21.6421 0.838702 22.1956 3.66193 21.6941 6.08556C20.9588 9.64207 18.705 10.687 17.1465 10.1436Z"
+                fill="#0E7A81"
+              />
+              <path
+                d="M0.74263 11.6341C-0.392258 9.75996 -0.298351 7.2684 1.52586 6.26339C3.16226 5.36627 5.39807 6.23941 6.62087 8.25743C7.75575 10.1296 7.66185 12.6232 5.83763 13.6282C4.08136 14.5912 1.85954 13.4743 0.74263 11.6341Z"
+                fill="#0E7A81"
+              />
+              <path
+                d="M23.1167 13.6262C21.2925 12.6212 21.1986 10.1296 22.3335 8.25543C23.5563 6.23941 25.7901 5.36227 27.4285 6.26139C29.2527 7.2664 29.3466 9.75796 28.2117 11.6321C27.0948 13.4743 24.873 14.5912 23.1167 13.6262Z"
+                fill="#0E7A81"
+              />
+            </svg>
+            <p>Peddy</p>
+          </div>
 
-    <h1>Paddy</h1>
-    <p>Welcome to the Paddy application!</p>
-    
-</body>
+          <!-- Dynamic Menu -->
+          <div class="navbar-center gap-7" id="navbarMenu"></div>
+
+          <div class="navbar-end cursor-pointer">
+            <svg
+              width="56"
+              height="56"
+              viewBox="0 0 56 56"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <rect width="56" height="56" rx="28" fill="white" />
+              <rect
+                x="0.5"
+                y="0.5"
+                width="55"
+                height="55"
+                rx="27.5"
+                stroke="#0E7A81"
+                stroke-opacity="0.2"
+              />
+              <g clip-path="url(#clip0_5_26)">
+                <path
+                  d="M24 23C24 24.0609 24.4214 25.0783 25.1716 25.8284C25.9217 26.5786 26.9391 27 28 27C29.0609 27 30.0783 26.5786 30.8284 25.8284C31.5786 25.0783 32 24.0609 32 23C32 21.9391 31.5786 20.9217 30.8284 20.1716C30.0783 19.4214 29.0609 19 28 19C26.9391 19 25.9217 19.4214 25.1716 20.1716C24.4214 20.9217 24 21.9391 24 23Z"
+                  stroke="#131313"
+                  stroke-opacity="0.7"
+                  stroke-width="1.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+                <path
+                  d="M22 37V35C22 33.9391 22.4214 32.9217 23.1716 32.1716C23.9217 31.4214 24.9391 31 26 31H30C31.0609 31 32.0783 31.4214 32.8284 32.1716C33.5786 32.9217 34 33.9391 34 35V37"
+                  stroke="#131313"
+                  stroke-opacity="0.7"
+                  stroke-width="1.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </g>
+              <defs>
+                <clipPath id="clip0_5_26">
+                  <rect
+                    width="24"
+                    height="24"
+                    fill="white"
+                    transform="translate(16 16)"
+                  />
+                </clipPath>
+              </defs>
+            </svg>
+          </div>
+      
+      </nav>
+    </header>
+  </body>
+  <script>
+    const navbarMenu = [
+      { name: "Home", path: "/" },
+      { name: "Shop", path: "/" },
+      { name: "Contact", path: "/" },
+    ];
+
+    // Function to generate menu items
+    function generateMenu() {
+      const menuContainer = document.getElementById("navbarMenu");
+
+      navbarMenu.forEach((item) => {
+        const menuItem = document.createElement("p");
+        menuItem.className =
+          "cursor-pointer hover:text-orange-600 transition-colors";
+        menuItem.textContent = item?.name;
+
+        //   menuItem.onclick = () => {
+        //     window.location.href = item.path;
+        //   };
+
+        menuContainer.appendChild(menuItem);
+      });
+    }
+
+    // Generate menu when page loads
+    document.addEventListener("DOMContentLoaded", generateMenu);
+  </script>
 </html>
