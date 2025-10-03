@@ -31,7 +31,7 @@ const displayAllCategorybtn = (btnDetails) => {
     // click: reset all -> then set clicked to active
     button.addEventListener("click", () => {
       console.log(`Category clicked: ${item.category}`);
-
+      categoryWiseDataFetchApi(item.category);
       // Reset all buttons to default look
       const allbtn = categoryBtnContainer.querySelectorAll("button");
       allbtn.forEach((btn) => {
@@ -67,14 +67,36 @@ const alldatafetchApi = async () => {
     .then((data) => getDisplayAllPets(data.pets))
     .catch((error) => console.log(error));
 };
+
 alldatafetchApi();
+
+const categoryWiseDataFetchApi = async (category) => {
+  console.log("categoryWiseDataFetchApi", category);
+  const url = `https://openapi.programming-hero.com/api/peddy/category/${category}`;
+  fetch(url)
+    .then((res) => res.json())
+    .then((data) => getDisplayAllPets(data?.data))
+    .catch((error) => console.log(error));
+};
 
 const getDisplayAllPets = (petDetails) => {
   console.log("petDetails", petDetails);
   const petContainer = document.getElementById("petContainer");
   petContainer.innerHTML = "";
 
+  if (petDetails.length === 0) {
+    petContainer.classList.remove('grid');
+    petContainer.classList.add('w-full', 'max-w-4xl', 'mx-auto'); // Add width constraints
+    petContainer.innerHTML = `
+       <div class='flex justify-center items-center h-[500px] w-full flex-col gap-4'>
+        <img src="/images/error.webp" alt="no data found"/>
+        <h2 class='text-2xl font-bold text-center'>No contain here in this category</h2>
+        </div> `
+      ;
+}
+
   petDetails.forEach((item) => {
+    petContainer.classList.add('grid');
     const card = document.createElement("div");
     card.className =
       "card bg-base-100 sm:w-auto md:max-w-[400px] shadow-sm p-5";
