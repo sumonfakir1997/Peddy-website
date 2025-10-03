@@ -1,0 +1,4 @@
+/* if using Tailwind with @apply support */
+.btn.active {
+  @apply bg-[#E7F2F2] rounded-4xl;
+}
