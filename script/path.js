@@ -47,6 +47,7 @@ const displayAllCategorybtn = (btnDetails) => {
     categoryBtnContainer.appendChild(button);
   });
 };
+
 const singlePet = {
   petId: 1,
   breed: "Golden Retriever",
@@ -60,6 +61,7 @@ const singlePet = {
   vaccinated_status: "Fully",
   pet_name: "Sunny",
 };
+
 const alldatafetchApi = async () => {
   const url = "https://openapi.programming-hero.com/api/peddy/pets";
   fetch(url)
@@ -72,39 +74,59 @@ alldatafetchApi();
 
 const categoryWiseDataFetchApi = async (category) => {
   console.log("categoryWiseDataFetchApi", category);
+
+  // Show loader immediately
+  showLoader();
+
   const url = `https://openapi.programming-hero.com/api/peddy/category/${category}`;
-  fetch(url)
-    .then((res) => res.json())
-    .then((data) => getDisplayAllPets(data?.data))
-    .catch((error) => console.log(error));
+  try {
+    const res = await fetch(url);
+    const data = await res.json();
+
+    // Small delay so loader is visible (optional)
+    setTimeout(() => {
+      getDisplayAllPets(data?.data);
+    }, 3000);
+  } catch (error) {
+    console.log(error);
+    const petContainer = document.getElementById("petContainer");
+    petContainer.className = "flex justify-center items-center w-full h-[500px]";
+    petContainer.innerHTML = `<p class="text-red-500">Something went wrong. Please try again.</p>`;
+  }
 };
 
+
+const showLoader = () => {
+  const petContainer = document.getElementById("petContainer");
+  petContainer.className = "flex justify-center items-center w-full h-[500px]";
+  petContainer.innerHTML = `
+    <span class="loading loading-bars loading-2xl"></span>
+  `;
+};
 // Global variable to store current pets data
 let currentPetsData = [];
 
-// Your original function (keep it as is)
 const getDisplayAllPets = (petDetails) => {
-  console.log("petDetails", petDetails);
   const petContainer = document.getElementById("petContainer");
   petContainer.innerHTML = "";
 
-  // Store the current data for sorting
   currentPetsData = petDetails || [];
 
+  // Case 1: No pets
   if (currentPetsData.length === 0) {
-    petContainer.classList.remove('grid');
-    petContainer.classList.add('w-full', 'max-w-4xl', 'mx-auto');
+    petContainer.className = "w-full max-w-4xl mx-auto flex justify-center items-center h-[500px]";
     petContainer.innerHTML = `
-       <div class='flex justify-center items-center h-[500px] w-full flex-col gap-4'>
+      <div class='flex justify-center items-center h-[500px] w-full flex-col gap-4'>
         <img src="/images/error.webp" alt="no data found"/>
-        <h2 class='text-2xl font-bold text-center'>No contain here in this category</h2>
-        </div> `;
+        <h2 class='text-2xl font-bold text-center'>No content in this category</h2>
+      </div>`;
     return;
   }
 
-  // Display pets using your original logic
+  // Case 2: Pets exist
+  petContainer.className = "grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6";
+
   currentPetsData.forEach((item) => {
-    petContainer.classList.add('grid');
     const card = document.createElement("div");
     card.className = "card bg-base-100 sm:w-auto md:max-w-[400px] shadow-sm p-5";
     card.innerHTML = `
@@ -118,58 +140,10 @@ const getDisplayAllPets = (petDetails) => {
       <div class="card-body p-0">
         <h2 class="card-title mt-4">${item.pet_name || "Unknown Pet"}</h2>
         <div class="card-actions flex-col justify-between gap-2">
-          <div class="flex gap-2">
-            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-              <g clip-path="url(#clip0_2081_39)">
-                <path d="M3.33334 3.33337H8.33334V8.33337H3.33334V3.33337Z" stroke="#5A5A5A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                <path d="M11.6667 3.33337H16.6667V8.33337H11.6667V3.33337Z" stroke="#5A5A5A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                <path d="M3.33334 11.6666H8.33334V16.6666H3.33334V11.6666Z" stroke="#5A5A5A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                <path d="M11.6667 14.1666C11.6667 14.8297 11.9301 15.4656 12.3989 15.9344C12.8677 16.4032 13.5036 16.6666 14.1667 16.6666C14.8297 16.6666 15.4656 16.4032 15.9344 15.9344C16.4033 15.4656 16.6667 14.8297 16.6667 14.1666C16.6667 13.5036 16.4033 12.8677 15.9344 12.3989C15.4656 11.93 14.8297 11.6666 14.1667 11.6666C13.5036 11.6666 12.8677 11.93 12.3989 12.3989C11.9301 12.8677 11.6667 13.5036 11.6667 14.1666Z" stroke="#5A5A5A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-              </g>
-              <defs>
-                <clipPath id="clip0_2081_39">
-                  <rect width="20" height="20" fill="white" />
-                </clipPath>
-              </defs>
-            </svg>
-            <p>Breed: <span>${item.breed || "Unknown"}</span></p>
-          </div>
-          <div class="flex gap-2">
-            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M5.625 2.5V4.375M14.375 2.5V4.375M2.5 15.625V6.25C2.5 5.75272 2.69754 5.27581 3.04917 4.92417C3.40081 4.57254 3.87772 4.375 4.375 4.375H15.625C16.1223 4.375 16.5992 4.57254 16.9508 4.92417C17.3025 5.27581 17.5 5.75272 17.5 6.25V15.625M2.5 15.625C2.5 16.1223 2.69754 16.5992 3.04917 16.9508C3.40081 17.3025 3.87772 17.5 4.375 17.5H15.625C16.1223 17.5 16.5992 17.3025 16.9508 16.9508C17.3025 16.5992 17.5 16.1223 17.5 15.625M2.5 15.625V9.375C2.5 8.87772 2.69754 8.40081 3.04917 8.04917C3.40081 7.69754 3.87772 7.5 4.375 7.5H15.625C16.1223 7.5 16.5992 7.69754 16.9508 8.04917C17.3025 8.40081 17.5 8.87772 17.5 9.375V15.625" stroke="#5A5A5A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-            <p>Date of Birth: <span>${item?.date_of_birth || "Not Available"}</span></p>
-          </div>
-          <div class="flex gap-2">
-            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <g opacity="0.7" clip-path="url(#clip0_2081_51)">
-                <path d="M10 11.6666V17.5" stroke="#131313" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                <path d="M7.5 15H12.5" stroke="#131313" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                <path d="M10 5C10.8841 5 11.7319 5.35119 12.357 5.97631C12.9821 6.60143 13.3333 7.44928 13.3333 8.33333C13.3333 9.21739 12.9821 10.0652 12.357 10.6904C11.7319 11.3155 10.8841 11.6667 10 11.6667C9.11594 11.6667 8.2681 11.3155 7.64297 10.6904C7.01785 10.0652 6.66666 9.21739 6.66666 8.33333C6.66666 7.44928 7.01785 6.60143 7.64297 5.97631C8.2681 5.35119 9.11594 5 10 5Z" stroke="#131313" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                <path d="M12.5 2.5C12.5 3.16304 12.2366 3.79893 11.7678 4.26777C11.2989 4.73661 10.663 5 10 5C9.33696 5 8.70107 4.73661 8.23223 4.26777C7.76339 3.79893 7.5 3.16304 7.5 2.5" stroke="#131313" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-              </g>
-              <defs>
-                <clipPath id="clip0_2081_51">
-                  <rect width="20" height="20" fill="white"/>
-                </clipPath>
-              </defs>
-            </svg>
-            <p>Gender: <span>${item.gender || "Unknown"}</span></p>
-          </div>
-          <div class="flex gap-2">
-            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <g clip-path="url(#clip0_2081_59)">
-                <path d="M13.9167 6.66667C13.7508 6.19603 13.4479 5.7858 13.0469 5.48878C12.6459 5.19176 12.1652 5.02153 11.6667 5H8.33334C7.67029 5 7.03441 5.26339 6.56557 5.73223C6.09673 6.20107 5.83334 6.83696 5.83334 7.5C5.83334 8.16304 6.09673 8.79893 6.56557 9.26777C7.03441 9.73661 7.67029 10 8.33334 10H11.6667C12.3297 10 12.9656 10.2634 13.4344 10.7322C13.9033 11.2011 14.1667 11.837 14.1667 12.5C14.1667 13.163 13.9033 13.7989 13.4344 14.2678C12.9656 14.7366 12.3297 15 11.6667 15H8.33334C7.83479 14.9785 7.35409 14.8082 6.95311 14.5112C6.55213 14.2142 6.24921 13.804 6.08334 13.3333" stroke="#5A5A5A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                <path d="M10 2.5V5M10 15V17.5" stroke="#5A5A5A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-              </g>
-              <defs>
-                <clipPath id="clip0_2081_59">
-                  <rect width="20" height="20" fill="white"/>
-                </clipPath>
-              </defs>
-            </svg>
-            <p>Price: <span>$${item?.price || " Not Given"}</span></p>
-          </div>
+          <p>Breed: <span>${item.breed || "Unknown"}</span></p>
+          <p>Date of Birth: <span>${item?.date_of_birth || "Not Available"}</span></p>
+          <p>Gender: <span>${item.gender || "Unknown"}</span></p>
+          <p>Price: <span>$${item?.price || " Not Given"}</span></p>
         </div>
         <div class="card-actions justify-between border-t border-gray-200 pt-4">
           <div class="badge badge-outline cursor-pointer">
