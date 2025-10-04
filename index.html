@@ -220,6 +220,7 @@
         <p>Phone: +31 85 964 47 25</p>
         <p>Email: info@yourdomain.com</p>
         <p>Openings hours: 9.00 AM - 5.00 PM</p>
+        
         <div class="flex items-center gap-6 mt-3">
           <a href="/">
             <p>
@@ -367,6 +368,14 @@
         <a class="link link-hover">Animals</a>
         <a class="link link-hover">Foundation</a>
         <a class="link link-hover">Contact</a>
+
+        <!-- dynamically show years  -->
+
+        <script>
+          const date = new Date();
+          const year = date.getFullYear();  
+          document.write(`© ${year} Peddy Website - All rights reserved`);
+        </script>
       </nav>
       <nav>
         <h6 class="footer-title">Drop a Message</h6>
