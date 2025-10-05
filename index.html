@@ -163,43 +163,16 @@
           <!-- selected photo gallery section  -->
 
           <div
-            class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 gap-4 mt-5 sm:w-auto lg:max-w-[410px] md:max-h-[410px] border p-5 rounded-lg border-gray-200"
+          id="gallery" 
+            class="hidden grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 gap-4 mt-5 sm:w-auto max-h-[700px] border p-5 rounded-lg border-gray-200"
           >
-            <figure class="h-[100px] w-">
+            <!-- <figure class="h-[100px] w-">
               <img
                 src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
                 alt="Shoes"
                 class="rounded-lg w-full h-[100px] object-cover"
               />
-            </figure>
-            <figure>
-              <img
-                src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
-                alt="Shoes"
-                class="rounded-lg w-full h-[100px] object-cover"
-              />
-            </figure>
-            <figure>
-              <img
-                src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
-                alt="Shoes"
-                class="rounded-lg w-full h-[100px] object-cover"
-              />
-            </figure>
-            <figure>
-              <img
-                src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
-                alt="Shoes"
-                class="rounded-lg w-full h-[100px] object-cover"
-              />
-            </figure>
-            <figure>
-              <img
-                src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
-                alt="Shoes"
-                class="rounded-lg w-full h-[100px] object-cover"
-              />
-            </figure>
+            </figure> -->
           </div>
         </div>
       </section>
@@ -368,14 +341,10 @@
         <a class="link link-hover">Animals</a>
         <a class="link link-hover">Foundation</a>
         <a class="link link-hover">Contact</a>
-
+        
         <!-- dynamically show years  -->
+        <p id="dynamically-year"></p>
 
-        <script>
-          const date = new Date();
-          const year = date.getFullYear();  
-          document.write(`© ${year} Peddy Website - All rights reserved`);
-        </script>
       </nav>
       <nav>
         <h6 class="footer-title">Drop a Message</h6>

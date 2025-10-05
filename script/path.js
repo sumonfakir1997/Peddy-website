@@ -128,11 +128,15 @@ const getDisplayAllPets = (petDetails) => {
 
   currentPetsData.forEach((item) => {
     const card = document.createElement("div");
-    card.className = "card bg-base-100 sm:w-auto md:max-w-[400px] shadow-sm p-5";
+    card.className =
+      "card bg-base-100 sm:w-auto md:max-w-[400px] shadow-sm p-5";
     card.innerHTML = `
       <figure>
         <img
-          src="${item.image || "https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"}"
+          src="${
+            item.image ||
+            "https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
+          }"
           alt="${item.pet_name || "Pet"}"
           class="rounded-lg w-full h-48 object-cover"
         />
@@ -141,7 +145,9 @@ const getDisplayAllPets = (petDetails) => {
         <h2 class="card-title mt-4">${item.pet_name || "Unknown Pet"}</h2>
         <div class="card-actions flex-col justify-between gap-2">
           <p>Breed: <span>${item.breed || "Unknown"}</span></p>
-          <p>Date of Birth: <span>${item?.date_of_birth || "Not Available"}</span></p>
+          <p>Date of Birth: <span>${
+            item?.date_of_birth || "Not Available"
+          }</span></p>
           <p>Gender: <span>${item.gender || "Unknown"}</span></p>
           <p>Price: <span>$${item?.price || " Not Given"}</span></p>
         </div>
@@ -151,10 +157,13 @@ const getDisplayAllPets = (petDetails) => {
               <path d="M5.5275 8.54163C6.19917 8.54163 6.805 8.16996 7.22 7.64163C7.86688 6.81631 8.67893 6.13511 9.60417 5.64163C10.2067 5.32163 10.7292 4.84496 10.9817 4.21246C11.159 3.76933 11.2501 3.29642 11.25 2.81913V2.29163C11.25 2.12587 11.3159 1.96689 11.4331 1.84968C11.5503 1.73247 11.7092 1.66663 11.875 1.66663C12.3723 1.66663 12.8492 1.86417 13.2008 2.2158C13.5525 2.56743 13.75 3.04435 13.75 3.54163C13.75 4.50163 13.5333 5.41079 13.1475 6.22329C12.9258 6.68829 13.2367 7.29163 13.7517 7.29163M13.7517 7.29163H16.3567C17.2117 7.29163 17.9775 7.86996 18.0683 8.72079C18.1058 9.07246 18.125 9.42913 18.125 9.79163C18.1284 12.0719 17.3492 14.2843 15.9175 16.0591C15.5942 16.4608 15.095 16.6666 14.58 16.6666H11.2333C10.8308 16.6666 10.43 16.6016 10.0475 16.475L7.4525 15.6083C7.07009 15.4811 6.66968 15.4164 6.26667 15.4166H4.92M13.7517 7.29163H11.875M4.92 15.4166C4.98917 15.5875 5.06417 15.7541 5.145 15.9183C5.30917 16.2516 5.08 16.6666 4.70917 16.6666H3.9525C3.21167 16.6666 2.525 16.235 2.30917 15.5266C2.02054 14.5793 1.87422 13.5944 1.875 12.6041C1.875 11.31 2.12084 10.0741 2.5675 8.93913C2.8225 8.29413 3.4725 7.91663 4.16667 7.91663H5.04417C5.4375 7.91663 5.665 8.37996 5.46084 8.71663C4.74908 9.88825 4.37369 11.2332 4.37584 12.6041C4.37584 13.5991 4.56917 14.5483 4.92084 15.4166H4.92Z" stroke="#131313" stroke-opacity="0.6" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
           </div>
-          <div class="badge badge-outline text-[#0E7A81] cursor-pointer">
-            Adopt
-          </div>
-          <div class="badge badge-outline text-[#0E7A81] cursor-pointer" onclick="showPetDetails(${JSON.stringify(item).replace(/"/g, "&quot;")})">
+         <div class="badge badge-outline text-[#0E7A81] cursor-pointer" 
+        onclick="toggleAdopt(this, '${item.image}')">
+      Adopt
+    </div>
+          <div class="badge badge-outline text-[#0E7A81] cursor-pointer" onclick="showPetDetails(${JSON.stringify(
+            item
+          ).replace(/"/g, "&quot;")})">
             Details
           </div>
         </div>
@@ -167,10 +176,10 @@ const getDisplayAllPets = (petDetails) => {
 // Sort function - uses your original display logic
 const sortPetsByPrice = () => {
   const petContainer = document.getElementById("petContainer");
-  
+
   if (currentPetsData.length === 0) {
-    petContainer.classList.remove('grid');
-    petContainer.classList.add('w-full', 'max-w-4xl', 'mx-auto');
+    petContainer.classList.remove("grid");
+    petContainer.classList.add("w-full", "max-w-4xl", "mx-auto");
     petContainer.innerHTML = `
        <div class='flex justify-center items-center h-[500px] w-full flex-col gap-4'>
         <img src="/images/error.webp" alt="no data found"/>
@@ -183,7 +192,7 @@ const sortPetsByPrice = () => {
   const sortedPets = [...currentPetsData].sort((a, b) => {
     const priceA = parseInt(a.price) || 0;
     const priceB = parseInt(b.price) || 0;
-    return priceA - priceB;  //low to high price 
+    return priceA - priceB; //low to high price
     // return priceB - priceA; // high to low price
   });
 
@@ -192,10 +201,10 @@ const sortPetsByPrice = () => {
 };
 
 // Add event listener for sort button
-document.addEventListener('DOMContentLoaded', function() {
-  const sortButton = document.querySelector('.sortByPrice');
+document.addEventListener("DOMContentLoaded", function () {
+  const sortButton = document.querySelector(".sortByPrice");
   if (sortButton) {
-    sortButton.addEventListener('click', sortPetsByPrice);
+    sortButton.addEventListener("click", sortPetsByPrice);
   }
 });
 
@@ -367,5 +376,59 @@ function generateMenu() {
   });
 }
 
+let selectedImages = []; // store adopted pets' images
+
+// selected gallery toggle function
+function toggleAdopt(button, imageUrl) {
+  const gallery = document.getElementById("gallery");
+
+  // if image already exists → remove it
+  if (selectedImages.includes(imageUrl)) {
+    selectedImages = selectedImages.filter((img) => img !== imageUrl);
+    button.textContent = "Adopt";
+    button.classList.add("text-[#0E7A81]");
+  } else {
+    // otherwise add image
+    selectedImages.push(imageUrl);
+    button.textContent = "Remove";
+  }
+
+  // update gallery display
+  updateGallery();
+
+  // toggle gallery visibility
+  if (selectedImages.length > 0) {
+    gallery.classList.remove("hidden");
+  } else {
+    gallery.classList.add("hidden");
+  }
+}
+
+function updateGallery() {
+  const gallery = document.getElementById("gallery");
+  gallery.innerHTML = ""; // clear old images
+
+  selectedImages.forEach((imgUrl) => {
+    const figure = document.createElement("figure");
+    figure.className = "h-[100px]";
+    figure.innerHTML = `
+      <img src="${imgUrl}" alt="Pet" class="rounded-lg w-full h-[100px] object-cover" />
+    `;
+    gallery.appendChild(figure);
+  });
+}
+
+// Function to dynamically show current year in footer
+
+function dynamicallyShowYear() {
+  const yearElement = document.getElementById("dynamically-year");
+  const date = new Date();
+  const year = date.getFullYear();
+  yearElement.textContent = `© ${year} Peddy Website - All rights reserved`;
+}
+
+dynamicallyShowYear();
+
+generateMenu()
 // Generate menu when page loads
-document.addEventListener("DOMContentLoaded", generateMenu);
+// document.addEventListener("DOMContentLoaded", generateMenu);
