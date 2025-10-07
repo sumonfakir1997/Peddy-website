@@ -2,3 +2,8 @@
 .btn.active {
   @apply bg-[#E7F2F2] rounded-4xl;
 }
+
+
+html {
+  scroll-behavior: smooth;
+}

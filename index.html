@@ -9,6 +9,7 @@
       rel="stylesheet"
       type="text/css"
     />
+    <link rel="stylesheet" href="./style/style.css" />
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
   </head>
   <body>
@@ -103,21 +104,29 @@
       <!-- path adoption section  -->
       <section>
         <div class="path-adoption sm:w-auto md:w-[752px] mx-auto my-20">
-          <h3 class="text-2xl font-semibold text-center text-gray-400">
+          <h3
+            class="sm:text-xl md:text-3xl font-semibold text-center  text-gray-400"
+          >
             Bringing Families Together ❤️‍🔥
           </h3>
           <h1
-            class="text-[72px] font-bold text-center line-height-[88px] sm:line"
+            class="md:text-[72px] sm:text-xl md:text-2xl font-bold text-center line-height-[88px] sm:line"
           >
             Your Path to Adoption Starts Here
-          </h1>
+          </h1> 
           <p class="text-center text-gray-400 mt-5">
             It is a long established fact that a reader will be distracted by
             the readable content of a page when looking at its layout. The point
             of using Lorem Ipsum is that it has a.
           </p>
           <p class="flex justify-center mt-5">
-            <button class="btn btn-success cursor-pointer">View More</button>
+            <!-- <button class="btn btn-success cursor-pointer">View More</button> -->
+             <p class="flex justify-center mt-5">
+                <a href="#petContainer" class="btn btn-success cursor-pointer">
+                  View More
+                </a>
+              </p>
+
           </p>
 
           <img
@@ -149,13 +158,15 @@
 
       <!-- best deal section  -->
       <section class="mx-auto">
-        <div class="flex justify-between">
+        <div
+          class="flex justify-between sm:w-auto md:max-w-[1000px] lg:max-w-[1344px] mx-auto"
+        >
           <p>Best Deal For Your</p>
 
           <button class="btn btn-success sortByPrice">Sort by Price</button>
         </div>
         <!-- card design -->
-        <div class="flex flex-col md:flex-row justify-between gap-4">
+        <div class="flex flex-col md:flex-row justify-center gap-4 py-10">
           <div
             class="grid grid-cols-1 md:grid-cols-3 grid-rows-[auto_1fr_auto] gap-10 sm:w-auto md:max-w-[1000px] lg:max-w-[1300px] sm:p-0 md:p-11"
             id="petContainer"
@@ -163,17 +174,9 @@
           <!-- selected photo gallery section  -->
 
           <div
-          id="gallery" 
-            class="hidden grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 gap-4 mt-5 sm:w-auto max-h-[700px] border p-5 rounded-lg border-gray-200"
-          >
-            <!-- <figure class="h-[100px] w-">
-              <img
-                src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
-                alt="Shoes"
-                class="rounded-lg w-full h-[100px] object-cover"
-              />
-            </figure> -->
-          </div>
+            id="gallery"
+            class="hidden grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 gap-4 sm:w-auto max-h-[700px] border p-5 rounded-lg border-gray-200"
+          ></div>
         </div>
       </section>
     </div>
@@ -193,7 +196,7 @@
         <p>Phone: +31 85 964 47 25</p>
         <p>Email: info@yourdomain.com</p>
         <p>Openings hours: 9.00 AM - 5.00 PM</p>
-        
+
         <div class="flex items-center gap-6 mt-3">
           <a href="/">
             <p>
@@ -341,7 +344,7 @@
         <a class="link link-hover">Animals</a>
         <a class="link link-hover">Foundation</a>
         <a class="link link-hover">Contact</a>
-        
+
         <!-- dynamically show years  -->
         <p id="dynamically-year"></p>
 
